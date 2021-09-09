@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "3"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"user-service-app"},"name":"user-service-app","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"user-service-app"}},"template":{"metadata":{"labels":{"app":"user-service-app"}},"spec":{"containers":[{"image":"pedro87silva/simple-node-api:1.14","imagePullPolicy":"Always","name":"user-service-app","ports":[{"containerPort":8084,"name":"http","protocol":"TCP"}]}]}}}}
+  creationTimestamp: "2021-08-06T00:28:18Z"
+  generation: 3
+  labels:
+    app: user-service-app
+  name: user-service-app
+  namespace: default
+  resourceVersion: "145684"
+  uid: 83961dcf-de0a-4f90-ba70-49d4adf9694c
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: user-service-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: user-service-app
+    spec:
+      containers:
+        - image: registry.gitlab.com/loja-energetica/user-service:arm-1.0.0-SNAPSHOT
+          imagePullPolicy: Always
+          name: user-service-app
+          ports:
+            - containerPort: 8084
+              name: http
+              protocol: TCP
+          env:
+            - name: DATA_SOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: user-service-config
+                  key: DATA_SOURCE_URL
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: regcred
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+    - lastTransitionTime: "2021-08-06T00:28:18Z"
+      lastUpdateTime: "2021-09-06T23:06:11Z"
+      message: ReplicaSet "user-service-app-7f78f44b54" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2021-09-06T23:29:23Z"
+      lastUpdateTime: "2021-09-06T23:29:23Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+  observedGeneration: 3
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
