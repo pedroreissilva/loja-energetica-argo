@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loja-energetica
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/pedroreissilva/loja-energetica-argo.git
+    targetRevision: HEAD
+    path: argocd
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
