@@ -1,7 +1,7 @@
 apiVersion: v1
-  data:
-    DATA_SOURCE_URL: jdbc:postgresql://postgres.postgres.svc.cluster.local:5432/task_service
-  kind: ConfigMap
-  metadata:
-    name: task-service-config
-    namespace: default
+kind: ConfigMap
+data:
+  DATA_SOURCE_URL: jdbc:postgresql://postgres.postgres.svc.cluster.local:5432/task_service
+metadata:
+  name: task-service-config
+  namespace: default
