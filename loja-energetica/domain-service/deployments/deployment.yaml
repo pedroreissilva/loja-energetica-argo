@@ -24,7 +24,7 @@ spec:
         app: domain-service
     spec:
       containers:
-        - image: registry.gitlab.com/loja-energetica/domain-service:arm-1.0.0-SNAPSHOT
+        - image: registry.gitlab.com/loja-energetica/domain-service:arm-1.0.002-SNAPSHOT
           imagePullPolicy: Always
           name: domain-service
           ports:
