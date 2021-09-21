@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: domain-service
-  name: domain-service
+    app: payment-service
+  name: payment-service
   namespace: default
 spec:
   progressDeadlineSeconds: 600
@@ -11,7 +11,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: domain-service
+      app: payment-service
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,12 +20,12 @@ spec:
   template:
     metadata:
       labels:
-        app: domain-service
+        app: payment-service
     spec:
       containers:
-        - image: registry.gitlab.com/loja-energetica/domain-service:arm-1.0.002-SNAPSHOT
+        - image: registry.gitlab.com/loja-energetica/payment-service:arm-1.0.002-SNAPSHOT
           imagePullPolicy: Always
-          name: domain-service
+          name: payment-service
           ports:
             - containerPort: 8084
               name: http
@@ -34,7 +34,7 @@ spec:
             - name: DATA_SOURCE_URL
               valueFrom:
                 configMapKeyRef:
-                  name: domain-service-config
+                  name: payment-service-config
                   key: DATA_SOURCE_URL
           resources: {}
           terminationMessagePath: /dev/termination-log
