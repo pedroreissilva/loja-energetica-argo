@@ -23,7 +23,7 @@ spec:
         app: user-service
     spec:
       containers:
-        - image: registry.gitlab.com/loja-energetica/user-service:1.0.002-SNAPSHOT
+        - image: registry.gitlab.com/loja-energetica/user-service:arm-1.0.002-SNAPSHOT
           imagePullPolicy: Always
           name: user-service
           ports:
