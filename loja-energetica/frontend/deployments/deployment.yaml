@@ -23,7 +23,7 @@ spec:
         app: le-frontend
     spec:
       containers:
-        - image: registry.gitlab.com/loja-energetica/loja-energetica-new-frontend:arm
+        - image: registry.gitlab.com/loja-energetica/loja-energetica-new-frontend:arm-node
           imagePullPolicy: Always
           name: le-frontend
           ports:
